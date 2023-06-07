@@ -1,11 +1,13 @@
 const Note = require("../models/note");
 
+// Função auxiliar para verificar se o usuário é o autor da nota
 const isOwner = (user, note) => {
   if (JSON.stringify(user._id) == JSON.stringify(note.author._id)) return true;
   else return false;
 };
 
 module.exports = {
+  // Método para listar todas as notas do usuário logado
   listarTodas: async (req, res) => {
     try {
       let notes = await Note.find({ author: req.user._id });
@@ -14,6 +16,7 @@ module.exports = {
       res.status(500).json({ error: "Problem to get notes" });
     }
   },
+  // Método para selecionar uma nota específica
   selecionar: async (req, res) => {
     try {
       const { id } = req.params;
@@ -27,6 +30,7 @@ module.exports = {
       res.status(500).json({ error: "Problem to get a new note" });
     }
   },
+  // Método para criar uma nova nota
   criar: async (req, res) => {
     const { title, body } = req.body;
 
@@ -38,6 +42,7 @@ module.exports = {
       res.status(500).json({ error: "Problem to create a new note" });
     }
   },
+  // Método para alterar uma nota existente
   alterar: async (req, res) => {
     const { title, body } = req.body;
     const { id } = req.params;
@@ -58,6 +63,7 @@ module.exports = {
       res.status(500).json({ error: "Problem to update a new note" });
     }
   },
+  // Método para excluir uma nota
   excluir: async (req, res) => {
     const { id } = req.params;
     try {
@@ -72,6 +78,7 @@ module.exports = {
       res.status(500).json({ error: "Problem to delete a new note" });
     }
   },
+  // Método para buscar notas por um termo de pesquisa
   buscar: async (req, res) => {
     const { query } = req.query;
     try {

@@ -4,6 +4,7 @@ require("dotenv").config();
 const secret = process.env.JWT_TOKEN;
 
 module.exports = {
+  // Método para registrar um novo usuário
   registrar: async (req, res) => {
     const { name, email, password } = req.body;
     const user = new User({ name, email, password });
@@ -17,6 +18,7 @@ module.exports = {
         .json({ error: "Error registering new user please try again." });
     }
   },
+  // Método para fazer login do usuário
   logar: async (req, res) => {
     const { email, password } = req.body;
 
