@@ -60,7 +60,7 @@ module.exports = {
     const { password } = req.body;
 
     try {
-      let user = await User.findOne({ _id: req.user._id });
+      let user = await User.find({ _id: req.user._id });
       user.password = password;
       user.save();
       res.json(user);
