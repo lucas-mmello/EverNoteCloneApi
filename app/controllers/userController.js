@@ -71,7 +71,7 @@ module.exports = {
 
   excluir: async function (req, res) {
     try {
-      let user = await User.findOne({ _id: req.user._id });
+      let user = await User.find({ _id: req.user._id });
       await user.delete();
       res.json({ message: "OK" }).status(201);
     } catch (error) {
