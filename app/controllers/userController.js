@@ -23,7 +23,7 @@ module.exports = {
     const { email, password } = req.body;
 
     try {
-      let user = await User.find({ email });
+      let user = await User.findOne({ email });
       if (!user) {
         res.status(401).json({ error: "Incorrect email or password" });
       } else {
@@ -60,7 +60,7 @@ module.exports = {
     const { password } = req.body;
 
     try {
-      let user = await User.find({ _id: req.user._id });
+      let user = await User.findOne({ _id: req.user._id });
       user.password = password;
       user.save();
       res.json(user);
@@ -71,7 +71,7 @@ module.exports = {
 
   excluir: async function (req, res) {
     try {
-      let user = await User.find({ _id: req.user._id });
+      let user = await User.findOne({ _id: req.user._id });
       await user.delete();
       res.json({ message: "OK" }).status(201);
     } catch (error) {
